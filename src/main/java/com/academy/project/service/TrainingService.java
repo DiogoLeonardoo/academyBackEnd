@@ -8,6 +8,9 @@ import com.academy.project.repository.ExerciseTrainingRepository;
 import com.academy.project.repository.TrainingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.academy.project.dto.TrainingDto;
+import com.academy.project.dto.ExerciseDto;
+
 
 import java.util.List;
 
@@ -43,5 +46,10 @@ public class TrainingService {
     public TrainingModel getTrainingById(int id) {
         return trainingRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Treinamento não encontrado com o ID: " + id));
     }
+
+
+
+
+
 
 }

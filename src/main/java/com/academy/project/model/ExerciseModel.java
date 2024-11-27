@@ -25,7 +25,7 @@ public class ExerciseModel {
     private String descricao;
 
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "exercise_muscle_group",
@@ -34,9 +34,6 @@ public class ExerciseModel {
     )
 
     private List<MuscleGroupModel> muscleGroups;
-
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
-    private List<ExerciseTrainingModel> exerciseTrainings = new ArrayList<>();
 
 }
 

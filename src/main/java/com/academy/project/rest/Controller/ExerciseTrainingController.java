@@ -66,4 +66,12 @@ public class ExerciseTrainingController {
         ApiResponse<String> response = new ApiResponse<>(UUID.randomUUID().toString(), "Exercise added to training successfully!", "Exercise added.");
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/training/{trainingId}")
+    public ResponseEntity<ApiResponse<List<ExerciseTrainingModel>>> getExercisesByTrainingId(@PathVariable Integer trainingId) {
+        List<ExerciseTrainingModel> exerciseTrainings = exerciseTrainingService.getExercisesByTrainingId(trainingId);
+        ApiResponse<List<ExerciseTrainingModel>> response = new ApiResponse<>(UUID.randomUUID().toString(), "Exercises found successfully!", exerciseTrainings);
+        return ResponseEntity.ok(response);
+    }
+
 }

@@ -15,5 +15,9 @@ public interface ExerciseTrainingRepository extends JpaRepository<ExerciseTraini
     @Query("SELECT et FROM ExerciseTrainingModel et WHERE et.training.id = :trainingId")
     List<ExerciseTrainingModel> findByTrainingId(@Param("trainingId") Long trainingId);
 
+    @Query("SELECT et FROM ExerciseTrainingModel et JOIN FETCH et.exercise WHERE et.training.id = :trainingId")
+    List<ExerciseTrainingModel> findAllByTrainingIdWithExercise(@Param("trainingId") Integer trainingId);
+
     List<ExerciseTrainingModel> findByExercise(ExerciseModel exercise);
+
 }

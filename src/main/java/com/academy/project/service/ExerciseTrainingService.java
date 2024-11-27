@@ -76,5 +76,11 @@ public class ExerciseTrainingService {
         exerciseTraining.setRestTime(restTime);
 
         exerciseTrainingRepository.save(exerciseTraining);  // Salva a associação
+
+
+    }
+
+    public List<ExerciseTrainingModel> getExercisesByTrainingId(Integer trainingId) {
+        return exerciseTrainingRepository.findAllByTrainingIdWithExercise(trainingId);
     }
 }

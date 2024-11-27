@@ -1,9 +1,6 @@
 package com.academy.project.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,12 +24,13 @@ public class TrainingModel {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JsonIgnore
+    @JoinColumn(name = "user_id")
     private UserModel user;
 
-    @OneToMany(mappedBy = "training", cascade = CascadeType.ALL)
-    private List<ExerciseTrainingModel> exerciseTrainings = new ArrayList<>();
+    @JsonManagedReference
+    @OneToMany(mappedBy = "training",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ExerciseTrainingModel> exerciseTrainings;
 
 
 }

@@ -55,4 +55,11 @@ public class UserController {
         ApiResponse<Void> response = new ApiResponse<>(UUID.randomUUID().toString(), "User deletado!", null);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/trainings/{id}")
+    public ResponseEntity<ApiResponse<UserModel>> getUserWithTrainingsAndExercises(@PathVariable Integer id) {
+        UserModel user = userService.getUserWithTrainingsAndExercises(id);
+        ApiResponse<UserModel> response = new ApiResponse<>(UUID.randomUUID().toString(), "Usuário encontrado com sucesso!", user);
+        return ResponseEntity.ok(response);
+    }
 }

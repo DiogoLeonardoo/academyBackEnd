@@ -1,6 +1,9 @@
 package com.academy.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,8 +12,9 @@ import lombok.Data;
 @Table(name = "exercise_training")
 public class ExerciseTrainingModel {
 
-    @EmbeddedId
-    private ExerciseTrainingId id = new ExerciseTrainingId();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "sets", nullable = false)
     private int sets;
@@ -21,14 +25,16 @@ public class ExerciseTrainingModel {
     @Column(name = "restTime", nullable = false)
     private int restTime;
 
-    @ManyToOne
-    @MapsId("exerciseId")
+    //Relacionamentos ---
+
     @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "training_id")
+    private TrainingModel training;
+
+    @JsonManagedReference
+    @ManyToOne
     @JoinColumn(name = "exercise_id")
     private ExerciseModel exercise;
 
-    @ManyToOne
-    @MapsId("trainingId")
-    @JoinColumn(name = "training_id")
-    private TrainingModel training;
 }

@@ -37,4 +37,10 @@ public class UserService {
     public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
+
+    public UserModel getUserWithTrainingsAndExercises(Integer userId) {
+        return userRepository.findUserWithTrainingsAndExercises(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+    }
+
 }
